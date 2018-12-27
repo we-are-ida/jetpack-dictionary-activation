@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Jetpack (by iDA)">
+    <dictionary-activation
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Dictionary Activation"
+    jcr:description="Managing Dictionary Activations"
+    href="/jetpack/dictionary-activation.html"
+    consoleId="jetpack-dictionary-activation"
+    icon="box"
+    order="{Long}100"/>
+</jcr:root>

@@ -1,0 +1,3 @@
+#base=css
+
+card-jetpack-dictionary-activation.less

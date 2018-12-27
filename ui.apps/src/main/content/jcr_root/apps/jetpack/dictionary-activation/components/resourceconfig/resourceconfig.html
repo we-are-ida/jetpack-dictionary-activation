@@ -1,0 +1,33 @@
+<tr data-sly-use.model="be.ida.jetpack.dictionaryactivation.models.Dictionary"
+    class="foundation-collection-item foundation-collection-navigator card-jetpack-dictionary-activation"
+    is="coral-table-row"
+    data-path="${model.path}"
+    data-rootsource="${model.path}">
+
+    <td is="coral-table-cell" coral-table-rowselect>
+        <img itemprop="thumbnail" width="192" src="${model.thumbnail}" alt="">
+    </td>
+
+    <td class="foundation-collection-item-title" is="coral-table-cell">
+        <div class="main-sync">
+            <h4>${model.title}</h4>
+            <span class="description">${model.description}</span>
+        </div>
+    </td>
+
+    <td class="foundation-collection-item-keys" is="coral-table-cell">
+        ${model.numberOfTranslationKeys}
+    </td>
+
+    <td class="foundation-collection-item-new" is="coral-table-cell">
+        <span data-sly-test="${model.numberOfNewTranslations > 0}">${model.numberOfNewTranslations}</span>
+        <span data-sly-test="${model.numberOfNewTranslations == 0}"><i>No new translations</i></span>
+    </td>
+
+    <td class="foundation-collection-item-replication published" is="coral-table-cell">
+        <span data-sly-test="${model.replicationDate}" class="date">${model.replicationDate}</span>
+        <span data-sly-test="${model.replicationBy}" class="user">${model.replicationBy}</span>
+
+        <span data-sly-test="${!model.replicationDate}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </td>
+</tr>

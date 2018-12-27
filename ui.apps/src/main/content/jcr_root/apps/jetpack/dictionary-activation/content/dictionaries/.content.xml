@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Jetpack Dictionary Activation"
+        sling:resourceType="granite/ui/components/shell/collectionpage"
+        currentView="list"
+        modeGroup="jetpack-admin-dictionary-activation"
+        sling:vanityPath="/jetpack/dictionary-activation"
+        pageURITemplate="/libs/cq/i18n/translator.html{+id}"
+        targetCollection=".jetpack-admin-dictionary-activation">
+        <head jcr:primaryType="nt:unstructured">
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/admin/page/viewport"/>
+            <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+            <winmode
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/winmode"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Jetpack Dictionary Activation Tool"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/title"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/includeclientlibs"
+                categories="[coralui3,granite.ui.coral.foundation,jetpack.admin.dictionary-activation]"/>
+        </head>
+        <views jcr:primaryType="nt:unstructured">
+            <list
+                granite:rel="jetpack-admin-dictionary-activation"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/table"
+                itemprop="item"
+                layoutId="list"
+                limit="{Long}40"
+                maximized="{Boolean}true"
+                modeGroup="jetpack-admin-dictionary-activation"
+                path="${requestPathInfo.suffix}"
+                selectionMode="row"
+                sortMode="local"
+                stateId="jetpack.admin.dictionary-activation">
+                <columns
+                    jcr:primaryType="nt:unstructured"
+                    class="card-jetpack-dictionary-activation">
+                    <select
+                        jcr:primaryType="nt:unstructured"
+                        select="{Boolean}true"/>
+                    <title
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Dictionary"
+                        class="main"
+                        sortable="{Boolean}true"/>
+                    <keys
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Keys"
+                        class="keys"
+                        columnGroup="metadata"
+                        sortable="{Boolean}true"
+                        sortType="numeric"/>
+                    <new
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="New Translations (not published)"
+                        class="new"
+                        columnGroup="metadata"
+                        sortable="{Boolean}true"
+                        sortType="numeric"/>
+                    <replication
+                        jcr:primaryType="nt:unstructured"
+                        jcr:title="Published"
+                        class="replication"
+                        sortable="{Boolean}true"/>
+                </columns>
+                <datasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="jetpack/dictionary-activation/components/resourcesdatasource"
+                    itemResourceType="jetpack/dictionary-activation/components/resourceconfig"
+                    limit="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
+                    offset="${requestPathInfo.selectors[0]}"/>
+            </list>
+        </views>
+        <actions jcr:primaryType="nt:unstructured">
+            <secondary jcr:primaryType="nt:unstructured">
+                <classicUI
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/actionlink"
+                    text="Classic UI - Dictionary Management"
+                    title="Classic UI"
+                    href="/libs/cq/i18n/translator.html"
+                    variant="primary">
+                </classicUI>
+            </secondary>
+            <selection jcr:primaryType="nt:unstructured">
+                <publishDictionaries
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    action="cq-admin.jetpack.dictionary-activation.action.publish"
+                    activeSelectionCount="multiple"
+                    icon="publish"
+                    rel="jetpack-admin-dictionary-activation-action-publish"
+                    target=".jetpack-admin-dictionary-activation"
+                    text="Publish"
+                    title="Publish"
+                    variant="actionBar">
+                </publishDictionaries>
+            </selection>
+        </actions>
+    </jcr:content>
+    <edit/>
+</jcr:root>
