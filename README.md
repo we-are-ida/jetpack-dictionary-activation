@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ida-mediafoundry/jetpack-dictionary-activation.svg?branch=master)](https://travis-ci.org/ida-mediafoundry/jetpack-dictionary-activation)
+
 # Jetpack - Dictionary Activation
 (powered by iDA Mediafoundry)
 
