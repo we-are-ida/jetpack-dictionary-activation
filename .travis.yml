@@ -1,0 +1,16 @@
+language: java
+
+branches:
+  only:
+    - master
+    
+before_script:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+script:
+  - mvn clean install
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
