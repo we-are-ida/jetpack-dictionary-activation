@@ -1,23 +1,17 @@
 package be.ida.jetpack.dictionaryactivation.services.impl;
 
+import be.ida.jetpack.dictionaryactivation.models.Config;
 import be.ida.jetpack.dictionaryactivation.repositories.DictionaryRepository;
 import be.ida.jetpack.dictionaryactivation.services.DictionaryDataSourceService;
 import com.adobe.granite.ui.components.ComponentHelper;
-import com.adobe.granite.ui.components.Config;
 import com.adobe.granite.ui.components.ExpressionHelper;
 import com.adobe.granite.ui.components.PagingIterator;
 import com.adobe.granite.ui.components.ds.AbstractDataSource;
 import com.adobe.granite.ui.components.ds.DataSource;
-import com.adobe.granite.ui.components.ds.EmptyDataSource;
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.iterators.TransformIterator;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ResourceWrapper;
+import org.apache.sling.api.resource.*;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -28,49 +22,39 @@ import java.util.*;
 )
 public class DictionaryDataSourceServiceImpl implements DictionaryDataSourceService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DictionaryDataSourceService.class);
-
     @Reference
     private DictionaryRepository dictionaryRepository;
 
     @Override
     public DataSource getDataSource(HttpServletRequest request, Object cmp, Resource resource) {
-        ExpressionHelper ex = ((ComponentHelper)cmp).getExpressionHelper();
-        Config dsCfg = new Config(resource.getChild(Config.DATASOURCE));
+        Config config = buildConfig((ComponentHelper) cmp, resource);
 
-        final String itemRT = dsCfg.get("itemResourceType", String.class);
-        final Integer offset = ex.get(dsCfg.get("offset", String.class), Integer.class);
-        final Integer limit = ex.get(dsCfg.get("limit", String.class), Integer.class);
+        final Iterator<Resource> iterator = dictionaryRepository.getDictionaries();
+        return new AbstractDataSource() {
+            public Iterator<Resource> iterator() {
+                Iterator<Resource> it = new PagingIterator<Resource>(iterator, config.getOffset(), config.getLimit());
 
-        ResourceResolver resourceResolver = resource.getResourceResolver();
+                return new TransformIterator(it, o -> {
+                    Resource r = ((Resource) o);
 
-        try {
-            final Iterator<Resource> iterator = dictionaryRepository.getDictionaries(resourceResolver);
-
-            @SuppressWarnings("unchecked")
-            DataSource datasource = new AbstractDataSource() {
-                public Iterator<Resource> iterator() {
-                    Iterator<Resource> it = new PagingIterator<Resource>(iterator, offset, limit);
-
-                    return new TransformIterator(it, new Transformer() {
-                        public Object transform(Object o) {
-                            Resource r = ((Resource) o);
-
-                            return new ResourceWrapper(r) {
-                                public String getResourceType() {
-                                    return itemRT;
-                                }
-                            };
+                    return new ResourceWrapper(r) {
+                        public String getResourceType() {
+                            return config.getItemResourceType();
                         }
-                    });
-                }
-            };
+                    };
+                });
+            }
+        };
+    }
 
-            return datasource;
-        } catch (Exception e) {
-            LOG.error("Error while reading dictionaries list. " + e);
-        }
+    protected Config buildConfig(ComponentHelper cmp, Resource resource) {
+        ExpressionHelper ex = cmp.getExpressionHelper();
+        ValueMap valueMap = resource.getChild("datasource").getValueMap();
 
-        return EmptyDataSource.instance();
+        final String itemResourceType = valueMap.get("itemResourceType", String.class);
+        final Integer offset = ex.get(valueMap.get("offset", String.class), Integer.class);
+        final Integer limit = ex.get(valueMap.get("limit", String.class), Integer.class);
+
+        return new Config(itemResourceType, offset, limit);
     }
 }

@@ -1,7 +1,6 @@
 package be.ida.jetpack.dictionaryactivation.repositories;
 
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 
 import java.util.Iterator;
 
@@ -13,10 +12,9 @@ public interface DictionaryRepository {
     /**
      * Get dictionaries.
      *
-     * @param resourceResolver resource resolver for logged in user.
      * @return Iterator of resources.
      * @throws Exception
      */
-    Iterator<Resource> getDictionaries(ResourceResolver resourceResolver);
+    Iterator<Resource> getDictionaries();
 
 }
