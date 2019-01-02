@@ -17,8 +17,8 @@ import org.osgi.service.component.annotations.Reference;
  * Activate the Dictionary.
  * The dictionary to activate will be provided in the "path" request parameter.
  */
-@Component(service= WCMCommand.class,
-        property={
+@Component(service = WCMCommand.class,
+        property = {
                 Constants.SERVICE_DESCRIPTION + "=Jetpack - Publish Dictionary WcmCommand"
 
         })
@@ -40,17 +40,8 @@ public class PublishDictionaryWcmCommand implements WCMCommand {
 
         RequestParameter path = slingHttpServletRequest.getRequestParameter(PATH_PARAM);
 
-        HtmlResponse resp = null;
+        boolean success = dictionaryReplicationService.replicateDictionary(path.getString());
+        return HtmlStatusResponseHelper.createStatusResponse(success, "published", path.getString());
 
-        try {
-            boolean success = dictionaryReplicationService.replicateDictionary(path.getString());
-
-            resp = HtmlStatusResponseHelper.createStatusResponse(success, "published",
-                    path.getString());
-        } catch (Exception e) {
-            resp = HtmlStatusResponseHelper.createStatusResponse(false, e.getMessage());
-        }
-
-        return resp;
     }
 }
