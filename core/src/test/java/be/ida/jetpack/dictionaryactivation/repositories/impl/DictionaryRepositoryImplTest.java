@@ -2,14 +2,11 @@ package be.ida.jetpack.dictionaryactivation.repositories.impl;
 
 import be.ida.jetpack.dictionaryactivation.repositories.DictionaryRepository;
 import io.wcm.testing.mock.aem.junit.AemContext;
-import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -18,7 +15,8 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DictionaryRepositoryImplTest {
@@ -37,7 +35,7 @@ public class DictionaryRepositoryImplTest {
     @Test
     public void testGetDictionaries() {
         DictionaryRepositoryImpl dictionaryRepositorySpy = spy(DictionaryRepositoryImpl.class);
-        doReturn(getTestResources()).when(dictionaryRepositorySpy).getLanguageResources();
+        doReturn(getTestResources()).when(dictionaryRepositorySpy).getLanguageResources(any());
 
         context.registerInjectActivateService(dictionaryRepositorySpy);
 

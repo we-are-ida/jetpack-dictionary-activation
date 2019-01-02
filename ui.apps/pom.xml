@@ -7,7 +7,7 @@
     <!-- ====================================================================== -->
     <parent>
         <groupId>be.ida.jetpack</groupId>
-        <artifactId>dictionary-activation</artifactId>
+        <artifactId>dictionaryactivation</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -15,7 +15,7 @@
     <!-- ====================================================================== -->
     <!-- P R O J E C T  D E S C R I P T I O N                                   -->
     <!-- ====================================================================== -->
-    <artifactId>dictionary-activation.ui.apps</artifactId>
+    <artifactId>dictionaryactivation.ui.apps</artifactId>
     <packaging>content-package</packaging>
     <name>Jetpack - Dictionary Activation - UI apps</name>
     <description>
@@ -87,7 +87,7 @@
                     <embeddeds>
                         <embedded>
                             <groupId>be.ida.jetpack</groupId>
-                            <artifactId>dictionary-activation.core</artifactId>
+                            <artifactId>dictionaryactivation.core</artifactId>
                             <target>/apps/jetpack/dictionary-activation/install</target>
                         </embedded>
                     </embeddeds>
@@ -107,7 +107,7 @@
     <dependencies>
         <dependency>
             <groupId>be.ida.jetpack</groupId>
-            <artifactId>dictionary-activation.core</artifactId>
+            <artifactId>dictionaryactivation.core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

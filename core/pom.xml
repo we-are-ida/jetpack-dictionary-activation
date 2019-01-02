@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>be.ida.jetpack</groupId>
-        <artifactId>dictionary-activation</artifactId>
+        <artifactId>dictionaryactivation</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>dictionary-activation.core</artifactId>
+    <artifactId>dictionaryactivation.core</artifactId>
     <packaging>bundle</packaging>
     <name>Jetpack - Dictionary Activation - Core</name>
     <description>Core bundle for Jetpack dictionary activation</description>
