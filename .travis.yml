@@ -5,7 +5,8 @@ branches:
     - master
 
 before_script:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V --no-transfer-progress
+  - echo "MAVEN_OPTS='--no-transfer-progress'" > ~/.mavenrc
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
   - mvn clean install cobertura:cobertura
