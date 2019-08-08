@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>be.ida-mediafoundry.jetpack</groupId>
+        <groupId>be.ida_mediafoundry.jetpack</groupId>
         <artifactId>dictionaryactivation</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -55,12 +55,12 @@
                         !-- Import any version of javax.inject, to allow running on multiple versions of AEM -->
                         <Import-Package>javax.inject;version=0.0.0,*</Import-Package>
                         <Sling-Model-Packages>
-                            be.ida-mediafoundry.jetpack.dictionaryactivation.models
+                            be.ida_mediafoundry.jetpack.dictionaryactivation.models
                         </Sling-Model-Packages>
                         <Export-Package>
-                            be.ida-mediafoundry.jetpack.dictionaryactivation.servlets,
-                            be.ida-mediafoundry.jetpack.dictionaryactivation.services,
-                            be.ida-mediafoundry.jetpack.dictionaryactivation.models
+                            be.ida_mediafoundry.jetpack.dictionaryactivation.servlets,
+                            be.ida_mediafoundry.jetpack.dictionaryactivation.services,
+                            be.ida_mediafoundry.jetpack.dictionaryactivation.models
                         </Export-Package>
                         <Service-Component>OSGI-INF/*</Service-Component>
                     </instructions>
