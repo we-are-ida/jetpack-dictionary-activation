@@ -438,9 +438,9 @@
         <dependencies>
             <!-- Javax Annotations -->
             <dependency>
-                <groupId>javax</groupId>
-                <artifactId>annotation</artifactId>
-                <version>1.2.0</version>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>1.2</version>
             </dependency>
             <!-- OSGi Dependencies -->
             <dependency>

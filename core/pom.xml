@@ -72,8 +72,8 @@
     <dependencies>
         <!-- Javax Annotations -->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>annotation</artifactId>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
         </dependency>
         <!-- OSGi Dependencies -->
         <dependency>
