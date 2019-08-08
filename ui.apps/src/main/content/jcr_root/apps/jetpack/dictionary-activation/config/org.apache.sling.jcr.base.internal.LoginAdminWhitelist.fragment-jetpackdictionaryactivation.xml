@@ -3,4 +3,4 @@
       xmlns:jcr="http://www.jcp.org/jcr/1.0"
       jcr:primaryType="sling:OsgiConfig"
       whitelist.name="Jetpack Dictionary Activation"
-      whitelist.bundles="[be.ida.jetpack.dictionaryactivation.core]" />
+      whitelist.bundles="[be.ida-mediafoundry.jetpack.dictionaryactivation.core]" />
