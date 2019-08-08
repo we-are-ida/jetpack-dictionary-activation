@@ -1,11 +1,6 @@
 language: java
 
-branches:
-  only:
-    - master
-
 before_script:
-  - echo "MAVEN_OPTS='--no-transfer-progress'" > ~/.mavenrc
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 script:
