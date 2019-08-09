@@ -1,6 +1,6 @@
 language: java
 
-jdk: oraclejdk9
+jdk: openjdk8
 
 script:
   - mvn clean install cobertura:cobertura
