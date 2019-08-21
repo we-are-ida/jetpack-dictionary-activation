@@ -31,7 +31,6 @@ public class DictionaryRepositoryImplTest {
         context.load().json("/mocks/dictionaries.json", "/apps");
     }
 
-
     @Test
     public void testGetDictionaries() {
         DictionaryRepositoryImpl dictionaryRepositorySpy = spy(DictionaryRepositoryImpl.class);
