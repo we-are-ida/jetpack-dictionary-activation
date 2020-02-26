@@ -46,7 +46,7 @@ public class Dictionary {
             addLanguageCode(languageCodes, languageResource);
             languageResource.listChildren().forEachRemaining(dictionaryKeyResource -> {
                 addTranslationKeys(translationKeys, dictionaryKeyResource);
-                if(isNewTranslationSinceLastReplication(dictionaryKeyResource)){
+                if (isNewTranslationSinceLastReplication(dictionaryKeyResource)) {
                     numberOfNewTranslations++;
                 }
             });
@@ -56,14 +56,6 @@ public class Dictionary {
         setDescription(languageCodes);
     }
 
-    private void setDescription(List<String> languageCodes) {
-        if (languageCodes.size() < 10) {
-            description = String.join(", ", languageCodes);
-        } else {
-            description = languageCodes.size() + " languages";
-        }
-    }
-
     private boolean isNewTranslationSinceLastReplication(Resource dictionaryKeyResource) {
         Calendar created = dictionaryKeyResource.getValueMap().get("jcr:created", Calendar.class);
         return lastReplicated == null || lastReplicated.before(created);
@@ -71,7 +63,9 @@ public class Dictionary {
 
     private void addLanguageCode(List<String> languageCodes, Resource languageResource) {
         String languageCode = languageResource.getValueMap().get("jcr:language", String.class);
-        languageCodes.add(languageCode);
+        if (languageCode != null && !languageCode.isEmpty()) {
+            languageCodes.add(languageCode);
+        }
     }
 
     private void addTranslationKeys(Set<String> uniqueKeys, Resource dictionaryKey) {
@@ -104,6 +98,14 @@ public class Dictionary {
 
     public String getDescription() {
         return description;
+    }
+
+    private void setDescription(List<String> languageCodes) {
+        if (languageCodes.size() < 10) {
+            description = String.join(", ", languageCodes);
+        } else {
+            description = languageCodes.size() + " languages";
+        }
     }
 
     public String getReplicationDate() {

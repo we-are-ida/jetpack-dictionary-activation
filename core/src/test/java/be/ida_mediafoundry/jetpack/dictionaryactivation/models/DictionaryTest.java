@@ -21,6 +21,7 @@ public class DictionaryTest {
         context.load().json("/mocks/dictionary.json", "/apps/test-dictionary");
         context.load().json("/mocks/activated-dictionary.json", "/apps/test-dictionary-2");
         context.load().json("/mocks/activated-dictionary-more-languages.json", "/apps/test-dictionary-3");
+        context.load().json("/mocks/dictionary-with-non-language-folders.json", "/apps/test-dictionary-4");
         context.addModelsForClasses(Dictionary.class);
     }
 
@@ -80,5 +81,18 @@ public class DictionaryTest {
 
         assertThat(dictionary.getReplicationDate()).isNotBlank();
         assertThat(dictionary.getReplicationBy()).isNotBlank();
+    }
+
+    @Test
+    public void testDictionary_nonLanguageFolder() {
+        //given
+        Resource resource = context.resourceResolver().getResource("/apps/test-dictionary-4");
+        context.request().setResource(resource);
+
+        Dictionary dictionary = context.request().adaptTo(Dictionary.class);
+
+        assertThat(dictionary).isNotNull();
+        assertThat(dictionary.getTitle()).isEqualTo("/apps/test-dictionary-4");
+        assertThat(dictionary.getDescription()).isEqualTo("en, en-us");
     }
 }
